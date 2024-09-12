@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+:root {
+  @apply font-nunito bg-white selection:bg-sky-400;
+}
