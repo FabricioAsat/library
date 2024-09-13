@@ -2,6 +2,7 @@ package main
 
 import (
 	"os"
+	"sell-point/routers"
 	"sell-point/utils"
 
 	"github.com/gofiber/fiber/v2"
@@ -22,6 +23,7 @@ func main() {
 	}))
 
 	// Routes
+	routers.CollectionsRoute(app)
 
 	app.Listen(PORT)
 }
