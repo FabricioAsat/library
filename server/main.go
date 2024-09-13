@@ -1,10 +1,29 @@
 package main
 
-import "github.com/gofiber/fiber/v2"
+import (
+	"os"
+	"sell-point/routers"
+	"sell-point/utils"
 
-// go mod tidy
+	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/cors"
+)
+
+// go mod tidy - reseteamos el go.mod
 func main() {
+	utils.DotEnvInit()
+	PORT := os.Getenv("PORT")
 	app := fiber.New()
 
-	app.Listen(":3000")
+	// Cors
+	app.Use(cors.New(cors.Config{
+		AllowOrigins: "*",
+		AllowHeaders: "Origin, Content-Type, Accept",
+		AllowMethods: "GET, POST, PUT, DELETE",
+	}))
+
+	// Routes
+	routers.CollectionsRoute(app)
+
+	app.Listen(PORT)
 }
