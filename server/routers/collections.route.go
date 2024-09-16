@@ -15,5 +15,5 @@ func CollectionsRoute(app *fiber.App) {
 	collections.Get("/:id", collect.GetCollection)
 	collections.Post("/", collect.PostCollection)
 	collections.Put("/:id", collect.PutCollection)
-	collections.Delete("/:id", func(c *fiber.Ctx) error { return nil })
+	collections.Delete("/:id", collect.DeleteCollection)
 }
