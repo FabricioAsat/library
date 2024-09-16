@@ -12,7 +12,7 @@ func CollectionsRoute(app *fiber.App) {
 
 	// routing - /collections/...
 	collections.Get("/", collect.GetCollections)
-	collections.Get("/:id", func(c *fiber.Ctx) error { return nil })
+	collections.Get("/:id", collect.GetCollection)
 	collections.Post("/", collect.PostCollection)
 	collections.Put("/:id", collect.PutCollection)
 	collections.Delete("/:id", func(c *fiber.Ctx) error { return nil })
