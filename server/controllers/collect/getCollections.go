@@ -16,7 +16,8 @@ func GetCollections(c *fiber.Ctx) error {
 	ctx, cancel := context.WithTimeout(c.Context(), 10*time.Second)
 	defer cancel()
 
-	db := database.Connect()
+	db, disconnect := database.Connect()
+	defer disconnect()
 	collection := mongocollect.GetCollection(db, "collections")
 
 	cursor, err := collection.Find(ctx, bson.M{})
