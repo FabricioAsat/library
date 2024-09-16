@@ -7,9 +7,8 @@ import (
 )
 
 type Collection struct {
-	ID        primitive.ObjectID `bson:"_id"`
+	ID        primitive.ObjectID `bson:"_id,omitempty"`
 	Name      string             `bson:"name"`
-	Language  string             `bson:"language"`
 	CreatedAt time.Time          `bson:"created_at"`
 	UpdatedAt time.Time          `bson:"updated_at"`
 }
