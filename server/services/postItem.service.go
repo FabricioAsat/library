@@ -73,7 +73,7 @@ func PostMusicService(c *fiber.Ctx, data json.RawMessage) error {
 	defer cancel()
 	defer disconnect()
 
-	musicsCollection := mongocollect.GetCollection(db, "music")
+	musicsCollection := mongocollect.GetCollection(db, "musics")
 	var music models.MusicModel
 	if err := json.Unmarshal(data, &music); err != nil {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
