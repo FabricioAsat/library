@@ -1,6 +1,10 @@
 package routers
 
-import "github.com/gofiber/fiber/v2"
+import (
+	controllers "sell-point/controllers/items"
+
+	"github.com/gofiber/fiber/v2"
+)
 
 func ItemsRoute(app *fiber.App) {
 
@@ -12,9 +16,7 @@ func ItemsRoute(app *fiber.App) {
 	items.Get("/:id", func(c *fiber.Ctx) error {
 		return c.SendString("Hello, World!")
 	})
-	items.Post("/", func(c *fiber.Ctx) error {
-		return c.SendString("Hello, World!")
-	})
+	items.Post("/", controllers.PostItem)
 	items.Put("/:id", func(c *fiber.Ctx) error {
 		return c.SendString("Hello, World!")
 	})

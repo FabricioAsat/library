@@ -9,7 +9,7 @@ const (
 	VideogameType ItemType = "videogame"
 	MusicType     ItemType = "music"
 	MovieType     ItemType = "movie"
-	BoardGameType ItemType = "boardGame"
+	BoardGameType ItemType = "boardgame"
 )
 
 type ItemReq struct {

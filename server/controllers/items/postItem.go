@@ -17,21 +17,18 @@ func PostItem(c *fiber.Ctx) error {
 
 	switch itemReq.Type {
 	case models.BookType:
-		services.PostBookService(c)
+		return services.PostBookService(c, itemReq.Data)
 	case models.VideogameType:
-		services.PostVideogameService(c)
+		return services.PostVideogameService(c, itemReq.Data)
 	case models.MusicType:
-		services.PostMusicService(c)
+		return services.PostMusicService(c, itemReq.Data)
 	case models.MovieType:
-		services.PostMovieService(c)
+		return services.PostMovieService(c, itemReq.Data)
 	case models.BoardGameType:
-		services.PostBoardGameService(c)
+		return services.PostBoardGameService(c, itemReq.Data)
 	default:
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
 			"error": "Invalid item type",
 		})
 	}
-	return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
-		"error": "Item type not found",
-	})
 }

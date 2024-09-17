@@ -2,6 +2,7 @@ package services
 
 import (
 	"context"
+	"encoding/json"
 	"sell-point/database"
 	"sell-point/models"
 	mongocollect "sell-point/mongoCollect"
@@ -10,138 +11,139 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
-func PostBookService(c *fiber.Ctx) error {
+func PostBookService(c *fiber.Ctx, data json.RawMessage) error {
 	ctx, cancel := context.WithTimeout(c.Context(), 10*time.Second)
 	db, disconnect := database.Connect()
 	defer cancel()
 	defer disconnect()
 
-	booksCollection := mongocollect.GetCollection(db, "items/books")
+	booksCollection := mongocollect.GetCollection(db, "books")
 
 	var book models.BookModel
-	if err := c.BodyParser(&book); err != nil {
+	if err := json.Unmarshal(data, &book); err != nil {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
-			"error": "Invalid request body",
+			// "error": "Invalid request body",
+			"error": err.Error(),
 		})
 	}
 
-	insertedBook, err := booksCollection.InsertOne(ctx, book)
+	_, err := booksCollection.InsertOne(ctx, book)
 	if err != nil {
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
-			"error": "Failed to create book",
+			"error": err.Error(),
 		})
 	}
 
 	return c.Status(fiber.StatusCreated).JSON(fiber.Map{
 		"message": "Book created successfully",
-		"data":    insertedBook,
+		"data":    book,
 	})
 }
 
-func PostVideogameService(c *fiber.Ctx) error {
+func PostVideogameService(c *fiber.Ctx, data json.RawMessage) error {
 	ctx, cancel := context.WithTimeout(c.Context(), 10*time.Second)
 	db, disconnect := database.Connect()
 	defer cancel()
 	defer disconnect()
 
-	booksCollection := mongocollect.GetCollection(db, "items/videogames")
+	booksCollection := mongocollect.GetCollection(db, "videogames")
 	var videogame models.VideogameModel
-	if err := c.BodyParser(&videogame); err != nil {
+	if err := json.Unmarshal(data, &videogame); err != nil {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
-			"error": "Invalid request body",
+			"error": err.Error(),
 		})
 	}
 
-	insertedVideogame, err := booksCollection.InsertOne(ctx, videogame)
+	_, err := booksCollection.InsertOne(ctx, videogame)
 	if err != nil {
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
-			"error": "Failed to create videogame",
+			"error": err.Error(),
 		})
 	}
 
 	return c.Status(fiber.StatusCreated).JSON(fiber.Map{
 		"message": "Videogame created successfully",
-		"data":    insertedVideogame,
+		"data":    videogame,
 	})
 }
 
-func PostMusicService(c *fiber.Ctx) error {
+func PostMusicService(c *fiber.Ctx, data json.RawMessage) error {
 	ctx, cancel := context.WithTimeout(c.Context(), 10*time.Second)
 	db, disconnect := database.Connect()
 	defer cancel()
 	defer disconnect()
 
-	musicsCollection := mongocollect.GetCollection(db, "items/music")
+	musicsCollection := mongocollect.GetCollection(db, "music")
 	var music models.MusicModel
-	if err := c.BodyParser(&music); err != nil {
+	if err := json.Unmarshal(data, &music); err != nil {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
-			"error": "Invalid request body",
+			"error": err.Error(),
 		})
 	}
 
-	insertedMusic, err := musicsCollection.InsertOne(ctx, music)
+	_, err := musicsCollection.InsertOne(ctx, music)
 	if err != nil {
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
-			"error": "Failed to create music",
+			"error": err.Error(),
 		})
 	}
 
 	return c.Status(fiber.StatusCreated).JSON(fiber.Map{
 		"message": "Music created successfully",
-		"data":    insertedMusic,
+		"data":    music,
 	})
 }
 
-func PostMovieService(c *fiber.Ctx) error {
+func PostMovieService(c *fiber.Ctx, data json.RawMessage) error {
 	ctx, cancel := context.WithTimeout(c.Context(), 10*time.Second)
 	db, disconnect := database.Connect()
 	defer cancel()
 	defer disconnect()
 
-	moviesCollection := mongocollect.GetCollection(db, "items/movies")
-	var movie models.MusicModel
-	if err := c.BodyParser(&movie); err != nil {
+	moviesCollection := mongocollect.GetCollection(db, "movies")
+	var movie models.MovieModel
+	if err := json.Unmarshal(data, &movie); err != nil {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
-			"error": "Invalid request body",
+			"error": err.Error(),
 		})
 	}
 
-	insertedMovie, err := moviesCollection.InsertOne(ctx, movie)
+	_, err := moviesCollection.InsertOne(ctx, movie)
 	if err != nil {
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
-			"error": "Failed to create movie",
+			"error": err.Error(),
 		})
 	}
 
 	return c.Status(fiber.StatusCreated).JSON(fiber.Map{
 		"message": "Movie created successfully",
-		"data":    insertedMovie,
+		"data":    movie,
 	})
 }
 
-func PostBoardGameService(c *fiber.Ctx) error {
+func PostBoardGameService(c *fiber.Ctx, data json.RawMessage) error {
 	ctx, cancel := context.WithTimeout(c.Context(), 10*time.Second)
 	db, disconnect := database.Connect()
 	defer cancel()
 	defer disconnect()
 
-	boardgamesCollection := mongocollect.GetCollection(db, "items/boardgames")
-	var boardgame models.MusicModel
-	if err := c.BodyParser(&boardgame); err != nil {
+	boardgamesCollection := mongocollect.GetCollection(db, "boardgames")
+	var boardgame models.BoardGameModel
+	if err := json.Unmarshal(data, &boardgame); err != nil {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
-			"error": "Invalid request body",
+			"error": err.Error(),
 		})
 	}
 
-	insertedBoardgame, err := boardgamesCollection.InsertOne(ctx, boardgame)
+	_, err := boardgamesCollection.InsertOne(ctx, boardgame)
 	if err != nil {
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
-			"error": "Failed to create boardgame",
+			"error": err.Error(),
 		})
 	}
 
 	return c.Status(fiber.StatusCreated).JSON(fiber.Map{
 		"message": "Boardgame created successfully",
-		"data":    insertedBoardgame,
+		"data":    boardgame,
 	})
 }
