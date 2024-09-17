@@ -11,7 +11,7 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
-// GetItem is the controller for the GET /items/:id?type= endpoint
+// GET /items/:id?type= endpoint
 func GetItem(c *fiber.Ctx) error {
 	ctx, cancel := context.WithTimeout(c.Context(), 10*time.Second)
 	db, disconnect := database.Connect()

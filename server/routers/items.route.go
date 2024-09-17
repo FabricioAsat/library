@@ -10,10 +10,7 @@ func ItemsRoute(app *fiber.App) {
 
 	items := app.Group("/items")
 
-	items.Get("/", func(c *fiber.Ctx) error {
-		return c.SendString("Hello, World!")
-	})
-
+	items.Get("/", controllers.GetAllItems)
 	items.Get("/:id", controllers.GetItem)
 	items.Post("/", controllers.PostItem)
 
