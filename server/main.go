@@ -24,6 +24,7 @@ func main() {
 
 	// Routes
 	routers.CollectionsRoute(app)
+	routers.ItemsRoute(app)
 
 	app.Listen(PORT)
 }
