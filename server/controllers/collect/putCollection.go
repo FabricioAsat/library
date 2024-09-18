@@ -20,7 +20,7 @@ func PutCollection(c *fiber.Ctx) error {
 
 	collection := mongocollect.GetCollection(db, "collections")
 	collectionId := c.Params("id")
-	var collectionNewData, collectionOldData models.Collection
+	var collectionNewData models.Collection
 
 	objID, err := primitive.ObjectIDFromHex(collectionId)
 	if err != nil {
@@ -28,38 +28,21 @@ func PutCollection(c *fiber.Ctx) error {
 			"error": err.Error(),
 		})
 	}
-
-	// Parse the new collection data from the request body
 	if err := c.BodyParser(&collectionNewData); err != nil {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
 			"error": err.Error(),
 		})
 	}
 
-	// Find the old collection data by ID
-	if err := collection.FindOne(ctx, bson.M{"_id": objID}).Decode(&collectionOldData); err != nil {
-		return c.Status(fiber.StatusNotFound).JSON(fiber.Map{
-			"error": err.Error(),
-		})
-	}
-
-	// Validate if the name is the same
-	if collectionNewData.Name == collectionOldData.Name {
-		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
-			"error": "The collections name cannot be the same (change name)",
-		})
-	}
-
 	collectionNewData.UpdatedAt = time.Now()
-	result, err := collection.UpdateOne(ctx, bson.M{"_id": objID}, bson.M{"$set": collectionNewData})
-	if err != nil {
-		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
-			"error": err.Error(),
+	if err := collection.FindOneAndUpdate(ctx, bson.M{"_id": objID}, bson.M{"$set": collectionNewData}); err.Err() != nil {
+		return c.Status(fiber.StatusNotFound).JSON(fiber.Map{
+			"error": err.Err().Error(),
 		})
 	}
 
 	return c.Status(fiber.StatusOK).JSON(fiber.Map{
 		"message": "Collection updated successfully",
-		"result":  result,
+		"result":  collectionNewData,
 	})
 }

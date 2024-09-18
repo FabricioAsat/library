@@ -3,22 +3,15 @@ package services
 import (
 	"context"
 	"encoding/json"
-	"sell-point/database"
 	"sell-point/models"
 	mongocollect "sell-point/mongoCollect"
-	"time"
 
 	"github.com/gofiber/fiber/v2"
+	"go.mongodb.org/mongo-driver/mongo"
 )
 
-func PostBookService(c *fiber.Ctx, data json.RawMessage) error {
-	ctx, cancel := context.WithTimeout(c.Context(), 10*time.Second)
-	db, disconnect := database.Connect()
-	defer cancel()
-	defer disconnect()
-
+func PostBookService(c *fiber.Ctx, ctx context.Context, db *mongo.Client, data json.RawMessage) error {
 	booksCollection := mongocollect.GetCollection(db, "books")
-
 	var book models.BookModel
 	if err := json.Unmarshal(data, &book); err != nil {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
@@ -40,12 +33,7 @@ func PostBookService(c *fiber.Ctx, data json.RawMessage) error {
 	})
 }
 
-func PostVideogameService(c *fiber.Ctx, data json.RawMessage) error {
-	ctx, cancel := context.WithTimeout(c.Context(), 10*time.Second)
-	db, disconnect := database.Connect()
-	defer cancel()
-	defer disconnect()
-
+func PostVideogameService(c *fiber.Ctx, ctx context.Context, db *mongo.Client, data json.RawMessage) error {
 	booksCollection := mongocollect.GetCollection(db, "videogames")
 	var videogame models.VideogameModel
 	if err := json.Unmarshal(data, &videogame); err != nil {
@@ -67,12 +55,7 @@ func PostVideogameService(c *fiber.Ctx, data json.RawMessage) error {
 	})
 }
 
-func PostMusicService(c *fiber.Ctx, data json.RawMessage) error {
-	ctx, cancel := context.WithTimeout(c.Context(), 10*time.Second)
-	db, disconnect := database.Connect()
-	defer cancel()
-	defer disconnect()
-
+func PostMusicService(c *fiber.Ctx, ctx context.Context, db *mongo.Client, data json.RawMessage) error {
 	musicsCollection := mongocollect.GetCollection(db, "musics")
 	var music models.MusicModel
 	if err := json.Unmarshal(data, &music); err != nil {
@@ -94,12 +77,7 @@ func PostMusicService(c *fiber.Ctx, data json.RawMessage) error {
 	})
 }
 
-func PostMovieService(c *fiber.Ctx, data json.RawMessage) error {
-	ctx, cancel := context.WithTimeout(c.Context(), 10*time.Second)
-	db, disconnect := database.Connect()
-	defer cancel()
-	defer disconnect()
-
+func PostMovieService(c *fiber.Ctx, ctx context.Context, db *mongo.Client, data json.RawMessage) error {
 	moviesCollection := mongocollect.GetCollection(db, "movies")
 	var movie models.MovieModel
 	if err := json.Unmarshal(data, &movie); err != nil {
@@ -120,13 +98,7 @@ func PostMovieService(c *fiber.Ctx, data json.RawMessage) error {
 		"data":    movie,
 	})
 }
-
-func PostBoardGameService(c *fiber.Ctx, data json.RawMessage) error {
-	ctx, cancel := context.WithTimeout(c.Context(), 10*time.Second)
-	db, disconnect := database.Connect()
-	defer cancel()
-	defer disconnect()
-
+func PostBoardGameService(c *fiber.Ctx, ctx context.Context, db *mongo.Client, data json.RawMessage) error {
 	boardgamesCollection := mongocollect.GetCollection(db, "boardgames")
 	var boardgame models.BoardGameModel
 	if err := json.Unmarshal(data, &boardgame); err != nil {

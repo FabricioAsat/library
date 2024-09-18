@@ -19,8 +19,8 @@ func DeleteCollection(c *fiber.Ctx) error {
 	defer disconnect()
 
 	collections := mongocollect.GetCollection(db, "collections")
-	collectionId := c.Params("id")
-	objID, err := primitive.ObjectIDFromHex(collectionId)
+	id := c.Params("id")
+	objID, err := primitive.ObjectIDFromHex(id)
 	if err != nil {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
 			"error": err.Error(),
@@ -28,14 +28,8 @@ func DeleteCollection(c *fiber.Ctx) error {
 	}
 
 	var collectionData models.Collection
-	if err := collections.FindOne(ctx, bson.M{"_id": objID}).Decode(&collectionData); err != nil {
+	if err := collections.FindOneAndDelete(ctx, bson.M{"_id": objID}).Decode(&collectionData); err != nil {
 		return c.Status(fiber.StatusNotFound).JSON(fiber.Map{
-			"error": err.Error(),
-		})
-	}
-
-	if _, err := collections.DeleteOne(ctx, bson.M{"_id": objID}); err != nil {
-		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
 			"error": err.Error(),
 		})
 	}
