@@ -14,8 +14,5 @@ func ItemsRoute(app *fiber.App) {
 	items.Get("/:id", controllers.GetItem)
 	items.Post("/", controllers.PostItem)
 	items.Put("/:id", controllers.PutItem)
-
-	items.Delete("/:id", func(c *fiber.Ctx) error {
-		return c.SendString("Hello, World!")
-	})
+	items.Delete("/:id", controllers.DeleteItem)
 }
