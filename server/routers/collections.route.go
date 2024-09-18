@@ -6,7 +6,6 @@ import (
 	collect "sell-point/controllers/collect"
 )
 
-// Estas collections van a almacenar todo tipo de models (games, movies, music, etc)
 func CollectionsRoute(app *fiber.App) {
 	collections := app.Group("/collections")
 
