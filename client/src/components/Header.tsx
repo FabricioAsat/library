@@ -20,8 +20,11 @@ export const Header = () => {
         </button>
       </div>
 
+      {isOpen && (
+        <div className="fixed left-0 z-40 w-screen h-screen top-16 bg-black/25 lg:hidden"></div>
+      )}
       <div
-        className={`fixed lg:relative w-full h-full bg-neutral-100 top-16 max-w-96 lg:max-w-80 lg:top-0 ${
+        className={`fixed z-50 lg:relative w-full h-full bg-neutral-100 top-16 max-w-96 lg:max-w-80 lg:top-0 border-r-2 border-neutral-100 transition-all duration-300 ease-in-out ${
           isOpen ? "left-0" : "-left-full lg:left-0"
         }`}
       >
