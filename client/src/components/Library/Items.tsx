@@ -1,33 +1,82 @@
-import searchImg from "../../assets/search.svg";
+import bookImg from "../../assets/logo.svg";
+import musicImg from "../../assets/music.svg";
+import videogameImg from "../../assets/videogame.svg";
+import boardgameImg from "../../assets/boardgame.svg";
+import movieImg from "../../assets/movie.svg";
 
-const books = [
-  "book1",
-  "book2",
-  "book3",
-  "book4",
-  "book5",
-  "book6",
-  "book7",
-  "book8",
-  "book9",
-  "book10",
-];
+import { Item } from "../Item";
+import {
+  IBoardgame,
+  IBook,
+  IMovie,
+  IMusic,
+  IVideogame,
+} from "../../types/items";
 
-export const Items = () => {
+export const Items = ({
+  books,
+  music,
+  videogames,
+  boardGames,
+  movies,
+}: {
+  books: IBook[];
+  music: IMusic[];
+  videogames: IVideogame[];
+  boardGames: IBoardgame[];
+  movies: IMovie[];
+}) => {
   return (
-    <div className="flex flex-wrap justify-start gap-2">
+    <div className="flex flex-wrap justify-center gap-5 lg:justify-start">
       {books.map((book) => (
-        <div className="flex flex-col w-32 h-44" key={book}>
-          <img
-            src={searchImg}
-            alt="Book image"
-            className="object-contain w-full h-full rounded-lg"
-          />
-          <div className="flex flex-col items-center justify-center">
-            <span className="text-lg font-bold">{book}</span>
-            <span className="text-sm italic">Juan Perez</span>
-          </div>
-        </div>
+        <Item
+          key={book.ID}
+          id={book.ID}
+          title={book.Title}
+          subtitle={book.Author}
+          image={book.Image}
+          alternativeImage={bookImg}
+        />
+      ))}
+      {music.map((music) => (
+        <Item
+          key={music.ID}
+          id={music.ID}
+          title={music.Title}
+          subtitle={music.Artist}
+          image={music.Image}
+          alternativeImage={musicImg}
+        />
+      ))}
+      {videogames.map((videogame) => (
+        <Item
+          key={videogame.ID}
+          id={videogame.ID}
+          title={videogame.Title}
+          subtitle={videogame.Studio}
+          image={videogame.Image}
+          alternativeImage={videogameImg}
+        />
+      ))}
+      {boardGames.map((boardGame) => (
+        <Item
+          key={boardGame.ID}
+          id={boardGame.ID}
+          title={boardGame.Title}
+          subtitle={boardGame.Designer}
+          image={boardGame.Image}
+          alternativeImage={boardgameImg}
+        />
+      ))}
+      {movies.map((movie) => (
+        <Item
+          key={movie.ID}
+          id={movie.ID}
+          title={movie.Title}
+          subtitle={movie.Director}
+          image={movie.Image}
+          alternativeImage={movieImg}
+        />
       ))}
     </div>
   );
