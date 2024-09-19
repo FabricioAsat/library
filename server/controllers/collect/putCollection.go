@@ -43,6 +43,6 @@ func PutCollection(c *fiber.Ctx) error {
 
 	return c.Status(fiber.StatusOK).JSON(fiber.Map{
 		"message": "Collection updated successfully",
-		"result":  collectionNewData,
+		"data":  collectionNewData,
 	})
 }

@@ -36,5 +36,8 @@ func GetCollections(c *fiber.Ctx) error {
 		})
 	}
 
-	return c.Status(fiber.StatusOK).JSON(collections)
+	return c.Status(fiber.StatusOK).JSON(fiber.Map{
+		"message": "Collections found",
+		"data":    collections,
+	})
 }
