@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 :root {
-  @apply bg-white text-[#231f20] font-nunito selection:bg-sky-400;
+  @apply bg-white text-[#231f20] font-nunito selection:bg-sky-400 overflow-y-hidden;
 }

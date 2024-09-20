@@ -1,4 +1,5 @@
 export interface IResponseAllItems {
+  status: boolean;
   message: string;
   data: {
     books: IBook[];
@@ -17,9 +18,11 @@ export interface IResponseItem {
 export interface IResponseItems {
   message: string;
   data: (IBook | IMusic | IVideogame | IBoardgame | IMovie)[] | null;
+  status: boolean;
 }
 
 export interface IResponseCollections {
   message: string;
   data: ICollection[] | null;
+  status: boolean;
 }

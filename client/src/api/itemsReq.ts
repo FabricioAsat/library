@@ -6,7 +6,7 @@ export async function getAllItems(): Promise<IResponseAllItems> {
     const { data } = await axios.get<IResponseAllItems>(
       `${import.meta.env.VITE_API_URL}/items`
     );
-    return data;
+    return { data: data.data, message: data.message, status: true };
   } catch (err) {
     const axiosError = err as AxiosError;
     if (
@@ -16,9 +16,13 @@ export async function getAllItems(): Promise<IResponseAllItems> {
       axiosError.response.data !== null &&
       "error" in axiosError.response.data
     ) {
-      return { message: String(axiosError.response.data.error), data: null };
+      return {
+        message: String(axiosError.response.data.error),
+        data: null,
+        status: false,
+      };
     }
-    return { message: "Error desconocido", data: null };
+    return { message: "Sin conexión al servidor", data: null, status: false };
   }
 }
 
@@ -29,7 +33,7 @@ export async function getItemsByCollection(
     const { data } = await axios.get<IResponseAllItems>(
       `${import.meta.env.VITE_API_URL}/items/collection/${collectionId}`
     );
-    return data;
+    return { data: data.data, message: data.message, status: true };
   } catch (err) {
     const axiosError = err as AxiosError;
     if (
@@ -39,8 +43,12 @@ export async function getItemsByCollection(
       axiosError.response.data !== null &&
       "error" in axiosError.response.data
     ) {
-      return { message: String(axiosError.response.data.error), data: null };
+      return {
+        message: String(axiosError.response.data.error),
+        data: null,
+        status: false,
+      };
     }
-    return { message: "Error desconocido", data: null };
+    return { message: "Error desconocido", data: null, status: false };
   }
 }

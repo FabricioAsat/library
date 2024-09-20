@@ -6,11 +6,13 @@ export const CollectionSelector = ({
   isFetchingCollections,
   setCurrentCollection,
   currentCollection,
+  undefinedValue = "Todos mis items",
 }: {
   collections: ICollection[];
   isFetchingCollections: boolean;
   setCurrentCollection: (collection: ICollection | undefined) => void;
   currentCollection: ICollection | undefined;
+  undefinedValue: string;
 }) => {
   const [showCollection, setShowCollection] = useState(false);
 
@@ -34,20 +36,25 @@ export const CollectionSelector = ({
             onClick={() => setShowCollection(!showCollection)}
             className="w-full p-2 text-lg font-bold rounded-md text-start"
           >
-            ▷ {currentCollection?.Name || "Todos mis items"}
+            ▷{" "}
+            {currentCollection?.Name || undefinedValue.length > 0
+              ? "Todos mis items"
+              : "Selecciona una colección"}
           </button>
-          {showCollection && (
+          {undefinedValue.length > 0 && showCollection && (
             <div className="absolute flex flex-col w-full py-2 transition-opacity duration-300 gap-y-2 bg-neutral-100">
-              <button
-                onClick={() => handleCollection(undefined)}
-                className={`w-full px-2 py-1 text-lg font-bold rounded-md text-start ${
-                  currentCollection === undefined
-                    ? "text-blue-500"
-                    : "hover:text-gray-500"
-                }`}
-              >
-                Todos mis items
-              </button>
+              {
+                <button
+                  onClick={() => handleCollection(undefined)}
+                  className={`w-full px-2 py-1 text-lg font-bold rounded-md text-start ${
+                    currentCollection === undefined
+                      ? "text-blue-500"
+                      : "hover:text-gray-500"
+                  }`}
+                >
+                  {undefinedValue}
+                </button>
+              }
               {collections.map((collection) => (
                 <button
                   key={collection.ID}
