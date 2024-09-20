@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { toast } from "sonner";
 
 import searchImg from "../assets/search.svg";
 
@@ -11,6 +10,7 @@ import { getCollections } from "../api/collectionReq";
 import { IBoardgame, IBook, IMovie, IMusic, IVideogame } from "../types/items";
 import { ICollection } from "../types/collections";
 import { Link } from "react-router-dom";
+import { toast } from "sonner";
 
 export const Library = () => {
   const [isFetchingItems, setIsFetchingItems] = useState(false);
@@ -36,17 +36,16 @@ export const Library = () => {
     const fetchItems = async () => {
       const data = await getAllItems();
 
-      if (!data.data) {
-        toast.error(data.message);
+      if (!data.status) {
         setIsFetchingItems(false);
+        toast.error(data.message);
         return;
       }
-      toast.success(data.message);
-      setBooks(data.data.books);
-      setMusic(data.data.musics);
-      setVideogames(data.data.videogames);
-      setBoardGames(data.data.boardGames);
-      setMovies(data.data.movies);
+      setBooks(data.data?.books || []);
+      setMusic(data.data?.musics || []);
+      setVideogames(data.data?.videogames || []);
+      setBoardGames(data.data?.boardGames || []);
+      setMovies(data.data?.movies || []);
       setIsFetchingItems(false);
     };
     setIsFetchingItems(true);
@@ -57,14 +56,12 @@ export const Library = () => {
   useEffect(() => {
     const fetchCollections = async () => {
       const data = await getCollections();
-
-      if (!data.data) {
+      if (!data.status) {
         toast.error(data.message);
         setIsFetchingCollections(false);
         return;
       }
-      toast.success(data.message);
-      setCollections(data.data);
+      setCollections(data.data || []);
       setIsFetchingCollections(false);
     };
     setIsFetchingCollections(true);
@@ -77,17 +74,16 @@ export const Library = () => {
     const fetchItems = async () => {
       const data = await getItemsByCollection(currentCollection.ID);
 
-      if (!data.data) {
-        toast.error(data.message);
+      if (!data.status) {
         setIsFetchingItems(false);
+        toast.error(data.message);
         return;
       }
-      toast.success(data.message);
-      setBooks(data.data.books || []);
-      setMusic(data.data.musics || []);
-      setVideogames(data.data.videogames || []);
-      setBoardGames(data.data.boardGames || []);
-      setMovies(data.data.movies || []);
+      setBooks(data.data?.books || []);
+      setMusic(data.data?.musics || []);
+      setVideogames(data.data?.videogames || []);
+      setBoardGames(data.data?.boardGames || []);
+      setMovies(data.data?.movies || []);
       setIsFetchingItems(false);
     };
     setIsFetchingItems(true);
@@ -118,6 +114,7 @@ export const Library = () => {
         isFetchingCollections={isFetchingCollections}
         setCurrentCollection={setCurrentCollection}
         currentCollection={currentCollection}
+        undefinedValue="Todos mis items"
       />
 
       {isFetchingItems && isFetchingCollections ? (
