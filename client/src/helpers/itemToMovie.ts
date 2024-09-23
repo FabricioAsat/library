@@ -24,11 +24,12 @@ export function itemToMovie(item: IMovie): object {
     image: item.Image,
     duration: Number(item.Duration),
     price: Number(item.Price),
-    published_at: new Date(
+    aspectRatio: item.AspectRatio,
+    publishedAt: new Date(
       Number(item.Year || 0),
       Number(item.Month || 0),
       Number(item.Days || 0)
-    ),
+    ).toISOString(),
     tags: item?.Tags?.split(", ").map((nombre) => nombre.trim()) || [],
     group: item.Group,
     notes: item.Notes,

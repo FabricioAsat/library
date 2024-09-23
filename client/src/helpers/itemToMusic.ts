@@ -23,11 +23,11 @@ export function itemToMusic(item: IMusic): object {
     image: item.Image,
     length: Number(item.Length),
     price: Number(item.Price),
-    published_at: new Date(
+    publishedAt: new Date(
       Number(item.Year || 0),
       Number(item.Month || 0),
       Number(item.Days || 0)
-    ),
+    ).toISOString(),
     tags: item?.Tags?.split(", ").map((nombre) => nombre.trim()) || [],
     group: item.Group,
     notes: item.Notes,

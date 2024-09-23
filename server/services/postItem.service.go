@@ -1,6 +1,6 @@
 package services
 
-import (
+import ("fmt"
 	"context"
 	"encoding/json"
 	"sell-point/models"
@@ -19,6 +19,8 @@ func PostBookService(c *fiber.Ctx, ctx context.Context, db *mongo.Client, data j
 			"error": err.Error(),
 		})
 	}
+
+	fmt.Println(book.PublishedAt)
 
 	_, err := booksCollection.InsertOne(ctx, book)
 	if err != nil {
