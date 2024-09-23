@@ -31,7 +31,6 @@ export const Items = ({
       {books.map((book) => (
         <Item
           key={book.ID}
-          id={book.ID}
           title={book.Title}
           subtitle={book.Author}
           image={book.Image}
@@ -41,7 +40,6 @@ export const Items = ({
       {music.map((music) => (
         <Item
           key={music.ID}
-          id={music.ID}
           title={music.Title}
           subtitle={music.Artist}
           image={music.Image}
@@ -51,7 +49,6 @@ export const Items = ({
       {videogames.map((videogame) => (
         <Item
           key={videogame.ID}
-          id={videogame.ID}
           title={videogame.Title}
           subtitle={videogame.Studio}
           image={videogame.Image}
@@ -61,9 +58,12 @@ export const Items = ({
       {boardGames.map((boardGame) => (
         <Item
           key={boardGame.ID}
-          id={boardGame.ID}
           title={boardGame.Title}
-          subtitle={boardGame.Designer}
+          subtitle={
+            boardGame?.Designers?.length > 0
+              ? boardGame.Designers[0]
+              : "Desconocido"
+          }
           image={boardGame.Image}
           alternativeImage={boardgameImg}
         />
@@ -71,7 +71,6 @@ export const Items = ({
       {movies.map((movie) => (
         <Item
           key={movie.ID}
-          id={movie.ID}
           title={movie.Title}
           subtitle={movie.Director}
           image={movie.Image}

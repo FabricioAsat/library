@@ -1,21 +1,23 @@
-import { IBook } from "../../types/items";
+import { IBoardgame } from "../../types/items";
 import {
   LabelAndImage,
   LabelAndImput,
   LabelAndTextArea,
 } from "../LabelAndImput";
 
-export const CreateBook = ({
+export const CreateBoardgame = ({
   item,
   handleChange,
 }: {
-  item: IBook;
+  item: IBoardgame;
   handleChange: (
     e:
       | React.ChangeEvent<HTMLInputElement>
       | React.ChangeEvent<HTMLTextAreaElement>
   ) => void;
 }) => {
+  console.log(item);
+
   return (
     <div className="flex flex-col px-4 pt-10 pb-20 overflow-x-hidden gap-y-6 gap-x-5">
       <LabelAndImput
@@ -26,13 +28,25 @@ export const CreateBook = ({
         onChange={handleChange}
       />
 
-      <LabelAndImput
-        label="Author"
-        id="Author"
-        name="Author"
-        value={item.Author}
-        onChange={handleChange}
-      />
+      <div className="flex gap-x-5">
+        <LabelAndImput
+          label="Designers"
+          id="Designers"
+          name="Designers"
+          value={item.Designers}
+          onChange={handleChange}
+          tinyInfo="Separate actors with commas."
+        />
+
+        <LabelAndImput
+          label="Actors"
+          id="Actors"
+          name="Actors"
+          value={item.Artists}
+          onChange={handleChange}
+          tinyInfo="Separate actors with commas."
+        />
+      </div>
 
       <LabelAndTextArea
         label="Description"
@@ -42,8 +56,16 @@ export const CreateBook = ({
         onChange={handleChange}
       />
 
+      <LabelAndImput
+        label="Studio"
+        id="Studio"
+        name="Studio"
+        value={item.Studio}
+        onChange={handleChange}
+      />
+
       <div className="flex flex-col">
-        <h3 className="text-xl font-bold">Published at</h3>
+        <h3 className="text-lg font-bold">Published date</h3>
         <div className="flex w-full gap-x-5">
           <LabelAndImput
             label="Year"
@@ -74,42 +96,61 @@ export const CreateBook = ({
 
       <div className="flex w-full gap-x-5">
         <LabelAndImput
-          label="ISBN 13"
-          id="ISBN13"
-          name="ISBN13"
-          value={item.ISBN13}
-          tinyInfo="Numbers only. Max 13 digits."
+          label="EAN"
+          id="EAN"
+          name="EAN"
+          value={item.EAN}
+          tinyInfo="Numbers only."
           onChange={handleChange}
         />
         <LabelAndImput
-          label="ISBN 10"
-          id="ISBN10"
-          name="ISBN10"
-          value={item.ISBN10}
+          label="UPC"
+          id="UPC"
+          name="UPC"
+          value={item.UPC}
           onChange={handleChange}
-          tinyInfo="Max 12 characters."
+          tinyInfo="Numbers only (check digit allowed)."
         />
       </div>
 
-      <div className="flex flex-col w-full gap-x-5 lg:flex-row">
-        <div className="flex w-full gap-y-1 gap-x-5">
-          <LabelAndImput
-            label="Pages"
-            id="Pages"
-            name="Pages"
-            value={item.Pages?.toString()}
-            onChange={handleChange}
-          />
+      <div className="flex gap-x-5">
+        <LabelAndImput
+          label="Play time"
+          placeholder="120 (minutes)"
+          id="PlayTime"
+          name="PlayTime"
+          value={item.PlayTime?.toString()}
+          onChange={handleChange}
+        />
 
-          <LabelAndImput
-            label="Price"
-            placeholder="0.00"
-            id="Price"
-            name="Price"
-            value={item.Price?.toString()}
-            onChange={handleChange}
-          />
-        </div>
+        <LabelAndImput
+          label="# of players"
+          placeholder="1-4"
+          id="NumberPlayers"
+          name="NumberPlayers"
+          value={item.NumberPlayers?.toString()}
+          onChange={handleChange}
+        />
+      </div>
+
+      <div className="flex w-full gap-x-5">
+        <LabelAndImput
+          label="Price"
+          placeholder="0.00"
+          id="Price"
+          name="Price"
+          value={item.Price?.toString()}
+          onChange={handleChange}
+        />
+
+        <LabelAndImput
+          label="Age group"
+          placeholder="+12"
+          id="Age"
+          name="Age"
+          value={item.Age?.toString()}
+          onChange={handleChange}
+        />
 
         <LabelAndImage
           label="Image"
@@ -139,7 +180,7 @@ export const CreateBook = ({
         </div>
         <LabelAndTextArea
           label="Notes"
-          id="Notes"
+          id="Gotes"
           name="Notes"
           value={item.Notes}
           onChange={handleChange}

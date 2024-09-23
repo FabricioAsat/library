@@ -17,3 +17,5 @@ export const NoCollections = () => {
     </div>
   );
 };
+
+// Creation of types  items done

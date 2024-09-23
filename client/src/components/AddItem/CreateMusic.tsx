@@ -1,15 +1,15 @@
-import { IBook } from "../../types/items";
+import { IMusic } from "../../types/items";
 import {
   LabelAndImage,
   LabelAndImput,
   LabelAndTextArea,
 } from "../LabelAndImput";
 
-export const CreateBook = ({
+export const CreateMusic = ({
   item,
   handleChange,
 }: {
-  item: IBook;
+  item: IMusic;
   handleChange: (
     e:
       | React.ChangeEvent<HTMLInputElement>
@@ -27,10 +27,10 @@ export const CreateBook = ({
       />
 
       <LabelAndImput
-        label="Author"
-        id="Author"
-        name="Author"
-        value={item.Author}
+        label="Artist"
+        id="Artist"
+        name="Artist"
+        value={item.Artist}
         onChange={handleChange}
       />
 
@@ -42,8 +42,16 @@ export const CreateBook = ({
         onChange={handleChange}
       />
 
+      <LabelAndImput
+        label="Studio"
+        id="Studio"
+        name="Studio"
+        value={item.Studio}
+        onChange={handleChange}
+      />
+
       <div className="flex flex-col">
-        <h3 className="text-xl font-bold">Published at</h3>
+        <h3 className="text-xl font-bold">Released date</h3>
         <div className="flex w-full gap-x-5">
           <LabelAndImput
             label="Year"
@@ -74,50 +82,49 @@ export const CreateBook = ({
 
       <div className="flex w-full gap-x-5">
         <LabelAndImput
-          label="ISBN 13"
-          id="ISBN13"
-          name="ISBN13"
-          value={item.ISBN13}
-          tinyInfo="Numbers only. Max 13 digits."
+          label="EAN"
+          id="EAN"
+          name="EAN"
+          value={item.EAN}
+          tinyInfo="Numbers only."
           onChange={handleChange}
         />
         <LabelAndImput
-          label="ISBN 10"
-          id="ISBN10"
-          name="ISBN10"
-          value={item.ISBN10}
+          label="UPC"
+          id="UPC"
+          name="UPC"
+          value={item.UPC}
           onChange={handleChange}
-          tinyInfo="Max 12 characters."
+          tinyInfo="Numbers only (check digit allowed)."
         />
       </div>
 
-      <div className="flex flex-col w-full gap-x-5 lg:flex-row">
-        <div className="flex w-full gap-y-1 gap-x-5">
-          <LabelAndImput
-            label="Pages"
-            id="Pages"
-            name="Pages"
-            value={item.Pages?.toString()}
-            onChange={handleChange}
-          />
+      <div className="flex gap-x-5">
+        <LabelAndImput
+          label="Length (min)"
+          placeholder="2 (minutes)"
+          id="Length"
+          name="Length"
+          value={item.Length?.toString()}
+          onChange={handleChange}
+        />
 
-          <LabelAndImput
-            label="Price"
-            placeholder="0.00"
-            id="Price"
-            name="Price"
-            value={item.Price?.toString()}
-            onChange={handleChange}
-          />
-        </div>
-
-        <LabelAndImage
-          label="Image"
-          id="image"
-          name="image"
+        <LabelAndImput
+          label="Price"
+          placeholder="0.00"
+          id="Price"
+          name="Price"
+          value={item.Price?.toString()}
           onChange={handleChange}
         />
       </div>
+
+      <LabelAndImage
+        label="Image"
+        id="image"
+        name="image"
+        onChange={handleChange}
+      />
 
       <div className="flex flex-col w-full gap-y-1 gap-x-5">
         <div className="flex w-full gap-y-1 gap-x-5">
