@@ -21,17 +21,17 @@ export function itemToBoardgame(item: IBoardgame): object {
     designers:
       item?.Designers?.split(", ").map((nombre) => nombre.trim()) || [],
     artists: item?.Artists?.split(", ").map((nombre) => nombre.trim()) || [],
-    play_time: Number(item.PlayTime),
+    playTime: Number(item.PlayTime),
     age: Number(item.Age),
-    number_players: Number(item.NumberPlayers),
+    numberPlayers: Number(item.NumberPlayers),
     image: item.Image,
     price: Number(item.Price),
     studio: item.Studio,
-    published_at: new Date(
+    publishedAt: new Date(
       Number(item.Year || 0),
       Number(item.Month || 0),
       Number(item.Days || 0)
-    ),
+    ).toISOString(),
     tags: item?.Tags?.split(", ").map((nombre) => nombre.trim()) || [],
     group: item.Group,
     notes: item.Notes,

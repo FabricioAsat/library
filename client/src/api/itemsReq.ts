@@ -1,6 +1,5 @@
 import axios, { AxiosError } from "axios";
 import { IResponseAllItems } from "../types/response";
-import { IBook } from "../types/items";
 
 export async function getAllItems(): Promise<IResponseAllItems> {
   try {
@@ -60,6 +59,7 @@ export async function postItem(item: object): Promise<IResponseAllItems> {
       `${import.meta.env.VITE_API_URL}/items`,
       item
     );
+    console.log(data.data);
     return { data: data.data, message: data.message, status: true };
   } catch (err) {
     const axiosError = err as AxiosError;
