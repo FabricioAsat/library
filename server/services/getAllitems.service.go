@@ -81,7 +81,7 @@ func GetAllMusicsService(c *fiber.Ctx, ctx context.Context, db *mongo.Client) ([
 
 func GetAllBoardGamesService(c *fiber.Ctx, ctx context.Context, db *mongo.Client) ([]models.BoardGameModel, error) {
 	boardGames := []models.BoardGameModel{}
-	boardGamesCollection := mongocollect.GetCollection(db, "boardGames")
+	boardGamesCollection := mongocollect.GetCollection(db, "boardgames")
 	cursor, err := boardGamesCollection.Find(ctx, bson.M{})
 	if err != nil {
 		return nil, c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{

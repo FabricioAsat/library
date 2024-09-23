@@ -1,59 +1,62 @@
 interface IBaseItem {
-  collection_id: string;
-  title: string;
-  description: string;
-  published_at: Date;
-  days: string;
-  month: string;
-  year: string;
-  image: string;
-  tags: string;
+  ID: string;
+  CollectionID: string;
+  Title: string;
+  Description: string;
+  PublishedAt: Date;
+  Days: string;
+  Month: string;
+  Year: string;
+  Image: string;
+  Tags: string;
 
-  group: string;
-  notes: string;
-  price: number;
+  Group: string;
+  Notes: string;
+  Price: number;
 }
 
 export interface IBook extends IBaseItem {
-  author: string;
-  isbn13: string;
-  isbn10: string;
-  pages: number;
+  Author: string;
+  ISBN13: string;
+  ISBN10: string;
+  Pages: number;
 }
 
 export interface IMovie extends IBaseItem {
-  director: string;
-  actors: string[];
-  ean: string;
-  upc: string;
-  aspect_ratio: string;
-  duration: number;
-  age: number;
+  Director: string;
+  Actors: string; // []
+  EAN: string;
+  UPC: string;
+  AspectRatio: string;
+  Duration: number;
+  Age: number;
+  Studio: string;
 }
 
 export interface IMusic extends IBaseItem {
-  artist: string;
-  studio: string;
-  length: number;
-  discs: number;
-  ean: string;
-  upc: string;
+  Artist: string;
+  Studio: string;
+  Length: number;
+  Discs: number;
+  EAN: string;
+  UPC: string;
 }
 
 export interface IVideogame extends IBaseItem {
-  platform: string;
-  studio: string;
-  ean: string;
-  upc: string;
-  esrb: string;
+  Platform: string;
+  Studio: string;
+  EAN: string;
+  UPC: string;
+  ESRB: string;
 }
 
 export interface IBoardgame extends IBaseItem {
-  Designer: string;
-  Artist: string;
+  Designers: string; //[]
+  Artists: string; //[]
   PlayTime: number;
   Age: number;
   NumberPlayers: number;
   EAN: string;
   UPC: string;
+  Studio: string;
 }

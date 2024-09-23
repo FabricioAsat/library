@@ -9,4 +9,5 @@ type MovieModel struct {
 	AspectRatio string   `bson:"aspect_ratio"`
 	Duration    int      `bson:"duration"`
 	Age         int      `bson:"age"`
+	Studio      string   `bson:"studio"`
 }

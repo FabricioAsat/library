@@ -36,6 +36,8 @@ export const Library = () => {
     const fetchItems = async () => {
       const data = await getAllItems();
 
+      console.log(data);
+
       if (!data.status) {
         setIsFetchingItems(false);
         toast.error(data.message);
@@ -89,6 +91,8 @@ export const Library = () => {
     setIsFetchingItems(true);
     fetchItems();
   }, [currentCollection]);
+
+  console.log(boardGames);
 
   return (
     <Container>

@@ -98,6 +98,7 @@ func PostMovieService(c *fiber.Ctx, ctx context.Context, db *mongo.Client, data 
 		"data":    movie,
 	})
 }
+
 func PostBoardGameService(c *fiber.Ctx, ctx context.Context, db *mongo.Client, data json.RawMessage) error {
 	boardgamesCollection := mongocollect.GetCollection(db, "boardgames")
 	var boardgame models.BoardGameModel

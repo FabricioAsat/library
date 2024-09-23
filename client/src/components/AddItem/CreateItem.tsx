@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { CreateBook } from "./CreateBook";
+import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 import {
   IBoardgame,
   IBook,
@@ -7,9 +8,18 @@ import {
   IMusic,
   IVideogame,
 } from "../../types/items";
-import { toast } from "sonner";
 
+import { postItem } from "../../api/itemsReq";
+import { CreateMovie } from "./CreateMovie";
+import { CreateBook } from "./CreateBook";
+import { CreateBoardgame } from "./CreateBoardgame";
 import { itemToBook } from "../../helpers/itemToBook";
+import { itemToMovie } from "../../helpers/itemToMovie";
+import { itemToBoardgame } from "../../helpers/itemToBoardgame";
+import { itemToMusic } from "../../helpers/itemToMusic";
+import { itemToVideogame } from "../../helpers/itemToVideogame";
+import { CreateVideogame } from "./CreateVideogame";
+import { CreateMusic } from "./CreateMusic";
 
 const itemTypes = ["Book", "Board Game", "Movie", "Music", "Videogame"];
 export const CreateItem = ({
@@ -24,15 +34,54 @@ export const CreateItem = ({
   ) => void;
 }) => {
   const [currentType, setCurrentType] = useState<string>(itemTypes[0]);
+  const navigateTo = useNavigate();
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    if (!item.title) {
+    if (!item.Title) {
       toast.error("El campo 'title' es requerido");
       return;
     }
 
-    itemToBook(item as IBook);
+    let bodyData: object = {};
+
+    bodyData = itemToBook(item as IBook);
+
+    switch (currentType) {
+      case itemTypes[0]:
+        bodyData = itemToBook(item as IBook);
+        break;
+      case itemTypes[1]:
+        bodyData = itemToBoardgame(item as IBoardgame);
+        break;
+      case itemTypes[2]:
+        bodyData = itemToMovie(item as IMovie);
+        break;
+      case itemTypes[3]:
+        bodyData = itemToMusic(item as IMusic);
+        break;
+      case itemTypes[4]:
+        bodyData = itemToVideogame(item as IVideogame);
+        break;
+    }
+
+    if (!bodyData) {
+      toast.error("Check your data");
+      return;
+    }
+
+    async function request() {
+      const response = await postItem(bodyData);
+
+      if (!response.status) {
+        toast.error(response.message);
+        return;
+      }
+      toast.success("Item creado correctamente");
+      navigateTo("/");
+    }
+
+    request();
   }
 
   return (
@@ -52,7 +101,27 @@ export const CreateItem = ({
           ))}
         </div>
 
-        <CreateBook item={item as IBook} handleChange={handleChange} />
+        {currentType === itemTypes[0] && (
+          <CreateBook item={item as IBook} handleChange={handleChange} />
+        )}
+        {currentType === itemTypes[1] && (
+          <CreateBoardgame
+            item={item as IBoardgame}
+            handleChange={handleChange}
+          />
+        )}
+        {currentType === itemTypes[2] && (
+          <CreateMovie item={item as IMovie} handleChange={handleChange} />
+        )}
+        {currentType === itemTypes[3] && (
+          <CreateMusic item={item as IMusic} handleChange={handleChange} />
+        )}
+        {currentType === itemTypes[4] && (
+          <CreateVideogame
+            item={item as IVideogame}
+            handleChange={handleChange}
+          />
+        )}
       </form>
     </>
   );
