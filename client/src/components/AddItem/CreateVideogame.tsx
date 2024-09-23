@@ -119,8 +119,8 @@ export const CreateVideogame = ({
       </div>
       <LabelAndImage
         label="Image"
-        id="image"
-        name="image"
+        id="Image"
+        name="Image"
         onChange={handleChange}
       />
 

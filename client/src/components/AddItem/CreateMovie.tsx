@@ -142,8 +142,8 @@ export const CreateMovie = ({
 
         <LabelAndImage
           label="Image"
-          id="image"
-          name="image"
+          id="Image"
+          name="Image"
           onChange={handleChange}
         />
       </div>

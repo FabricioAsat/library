@@ -16,8 +16,6 @@ export const CreateBoardgame = ({
       | React.ChangeEvent<HTMLTextAreaElement>
   ) => void;
 }) => {
-  console.log(item);
-
   return (
     <div className="flex flex-col px-4 pt-10 pb-20 overflow-x-hidden gap-y-6 gap-x-5">
       <LabelAndImput
@@ -154,8 +152,8 @@ export const CreateBoardgame = ({
 
         <LabelAndImage
           label="Image"
-          id="image"
-          name="image"
+          id="Image"
+          name="Image"
           onChange={handleChange}
         />
       </div>

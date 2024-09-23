@@ -27,7 +27,6 @@ export const Library = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(search);
   };
 
   // Fetch items from the API
@@ -35,8 +34,6 @@ export const Library = () => {
     if (currentCollection) return;
     const fetchItems = async () => {
       const data = await getAllItems();
-
-      console.log(data);
 
       if (!data.status) {
         setIsFetchingItems(false);
@@ -91,8 +88,6 @@ export const Library = () => {
     setIsFetchingItems(true);
     fetchItems();
   }, [currentCollection]);
-
-  console.log(boardGames);
 
   return (
     <Container>
