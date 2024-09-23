@@ -25,7 +25,7 @@ export const AddItem = () => {
       | React.ChangeEvent<HTMLInputElement>
       | React.ChangeEvent<HTMLTextAreaElement>
   ) => {
-    if (e.target.name === "image" && e.target instanceof HTMLInputElement) {
+    if (e.target.name === "Image" && e.target instanceof HTMLInputElement) {
       const file = e.target.files?.[0];
       if (file) {
         const reader = new FileReader();
@@ -39,8 +39,6 @@ export const AddItem = () => {
     }
     setItem({ ...item, [e.target.name]: e.target.value });
   };
-
-  console.log(item);
 
   // Fetch collections from the API
   useEffect(() => {
