@@ -1,7 +1,7 @@
 import { toast } from "sonner";
 import { IBook } from "../types/items";
 
-export function itemToBook(item: IBook): object {
+export function itemToBook(item: IBook, collectionId: string): object {
   const regexIsbn13 = /^\d{1,13}$/;
   const regexIsbn10 = /^\d{1,12}$/;
 
@@ -20,6 +20,7 @@ export function itemToBook(item: IBook): object {
     image: item.Image,
     isbn13: item.ISBN13,
     isbn10: item.ISBN10,
+    collectionId: collectionId,
     pages: Number(item.Pages),
     price: Number(item.Price),
     publishedAt: new Date(

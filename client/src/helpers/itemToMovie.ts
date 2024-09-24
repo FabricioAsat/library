@@ -1,7 +1,7 @@
 import { toast } from "sonner";
 import { IMovie } from "../types/items";
 
-export function itemToMovie(item: IMovie): object {
+export function itemToMovie(item: IMovie, collectionId: string): object {
   const regexUpc = /^\d{1,12}$/;
   const regexEan = /^\d{1,13}$/;
 
@@ -16,6 +16,7 @@ export function itemToMovie(item: IMovie): object {
   const bodyData = {
     title: item.Title,
     description: item.Description,
+    collectionId: collectionId,
     upc: item.UPC,
     ean: item.EAN,
     director: item.Director,

@@ -57,6 +57,8 @@ export const AddItem = () => {
     fetchCollections();
   }, []);
 
+  console.log(collections);
+
   return (
     <Container>
       <h1 className="text-3xl font-bold">Agregar un item</h1>
@@ -69,7 +71,11 @@ export const AddItem = () => {
       />
 
       {collections.length === 0 ? <NoCollections /> : <></>}
-      <CreateItem item={item as IBook} handleChange={handleChange} />
+      <CreateItem
+        item={item as IBook}
+        handleChange={handleChange}
+        currentCollection={currentCollection}
+      />
     </Container>
   );
 };

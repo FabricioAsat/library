@@ -1,7 +1,7 @@
 import { toast } from "sonner";
 import { IMusic } from "../types/items";
 
-export function itemToMusic(item: IMusic): object {
+export function itemToMusic(item: IMusic, collectionId: string): object {
   const regexUpc = /^\d{1,12}$/;
   const regexEan = /^\d{1,13}$/;
 
@@ -19,6 +19,7 @@ export function itemToMusic(item: IMusic): object {
     upc: item.UPC,
     ean: item.EAN,
     studio: item.Studio,
+    collectionId: collectionId,
     artist: item.Artist,
     image: item.Image,
     length: Number(item.Length),
