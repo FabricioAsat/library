@@ -1,7 +1,10 @@
 import { toast } from "sonner";
 import { IBoardgame } from "../types/items";
 
-export function itemToBoardgame(item: IBoardgame): object {
+export function itemToBoardgame(
+  item: IBoardgame,
+  collectionId: string
+): object {
   const regexUpc = /^\d{1,12}$/;
   const regexEan = /^\d{1,13}$/;
 
@@ -16,6 +19,7 @@ export function itemToBoardgame(item: IBoardgame): object {
   const bodyData = {
     title: item.Title,
     description: item.Description,
+    collectionId: collectionId,
     upc: item.UPC,
     ean: item.EAN,
     designers:

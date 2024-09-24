@@ -113,7 +113,7 @@ export const Library = () => {
         isFetchingCollections={isFetchingCollections}
         setCurrentCollection={setCurrentCollection}
         currentCollection={currentCollection}
-        undefinedValue="Todos mis items"
+        undefinedValue=""
       />
 
       {isFetchingItems && isFetchingCollections ? (

@@ -1,7 +1,10 @@
 import { toast } from "sonner";
 import { IVideogame } from "../types/items";
 
-export function itemToVideogame(item: IVideogame): object {
+export function itemToVideogame(
+  item: IVideogame,
+  collectionId: string
+): object {
   const regexUpc = /^\d{1,12}$/;
   const regexEan = /^\d{1,13}$/;
 
@@ -21,6 +24,7 @@ export function itemToVideogame(item: IVideogame): object {
     upc: item.UPC,
     ean: item.EAN,
     studio: item.Studio,
+    collectionId: collectionId,
     image: item.Image,
     price: Number(item.Price),
     publishedAt: new Date(

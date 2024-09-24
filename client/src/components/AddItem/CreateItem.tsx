@@ -20,11 +20,13 @@ import { itemToMusic } from "../../helpers/itemToMusic";
 import { itemToVideogame } from "../../helpers/itemToVideogame";
 import { CreateVideogame } from "./CreateVideogame";
 import { CreateMusic } from "./CreateMusic";
+import { ICollection } from "../../types/collections";
 
 const itemTypes = ["Book", "Board Game", "Movie", "Music", "Videogame"];
 export const CreateItem = ({
   item,
   handleChange,
+  currentCollection,
 }: {
   item: IBook | IMovie | IMusic | IVideogame | IBoardgame;
   handleChange: (
@@ -32,39 +34,42 @@ export const CreateItem = ({
       | React.ChangeEvent<HTMLInputElement>
       | React.ChangeEvent<HTMLTextAreaElement>
   ) => void;
+  currentCollection: ICollection | undefined;
 }) => {
   const [currentType, setCurrentType] = useState<string>(itemTypes[0]);
   const navigateTo = useNavigate();
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+
+    if (!currentCollection) {
+      toast.error("Debes seleccionar una colección");
+      return;
+    }
+
     if (!item.Title) {
       toast.error("El campo 'title' es requerido");
       return;
     }
 
     let bodyData: object = {};
-
-    bodyData = itemToBook(item as IBook);
-
     switch (currentType) {
       case itemTypes[0]:
-        bodyData = itemToBook(item as IBook);
+        bodyData = itemToBook(item as IBook, currentCollection.ID);
         break;
       case itemTypes[1]:
-        bodyData = itemToBoardgame(item as IBoardgame);
+        bodyData = itemToBoardgame(item as IBoardgame, currentCollection.ID);
         break;
       case itemTypes[2]:
-        bodyData = itemToMovie(item as IMovie);
+        bodyData = itemToMovie(item as IMovie, currentCollection.ID);
         break;
       case itemTypes[3]:
-        bodyData = itemToMusic(item as IMusic);
+        bodyData = itemToMusic(item as IMusic, currentCollection.ID);
         break;
       case itemTypes[4]:
-        bodyData = itemToVideogame(item as IVideogame);
+        bodyData = itemToVideogame(item as IVideogame, currentCollection.ID);
         break;
     }
-
     if (!bodyData) {
       toast.error("Check your data");
       return;

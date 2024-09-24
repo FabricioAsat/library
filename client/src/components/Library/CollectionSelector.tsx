@@ -38,10 +38,10 @@ export const CollectionSelector = ({
           >
             ▷{" "}
             {currentCollection?.Name || undefinedValue.length > 0
-              ? "Todos mis items"
+              ? currentCollection?.Name
               : "Selecciona una colección"}
           </button>
-          {undefinedValue.length > 0 && showCollection && (
+          {collections.length > 0 && showCollection && (
             <div className="absolute flex flex-col w-full py-2 transition-opacity duration-300 gap-y-2 bg-neutral-100">
               {
                 <button
@@ -52,7 +52,7 @@ export const CollectionSelector = ({
                       : "hover:text-gray-500"
                   }`}
                 >
-                  {undefinedValue}
+                  Sin colección
                 </button>
               }
               {collections.map((collection) => (
