@@ -16,6 +16,12 @@ export const AddColl = () => {
   const navigateTo = useNavigate();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.value.length > 40) {
+      toast.error(
+        "El nombre de la colección no puede tener más de 40 caracteres"
+      );
+      return;
+    }
     setCollection({ ...collection, [e.target.name]: e.target.value });
   };
 

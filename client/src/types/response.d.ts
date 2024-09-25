@@ -13,6 +13,7 @@ export interface IResponseAllItems {
 export interface IResponseItem {
   message: string;
   data: IBook | IMusic | IVideogame | IBoardgame | IMovie | null;
+  status: boolean;
 }
 
 export interface IResponseItems {

@@ -30,7 +30,9 @@ export const Items = ({
     <div className="flex flex-wrap justify-center gap-5 lg:justify-start">
       {books.map((book) => (
         <Item
+          type="book"
           key={book.ID}
+          id={book.ID}
           title={book.Title}
           subtitle={book.Author}
           image={book.Image}
@@ -39,7 +41,9 @@ export const Items = ({
       ))}
       {music.map((music) => (
         <Item
+          type="music"
           key={music.ID}
+          id={music.ID}
           title={music.Title}
           subtitle={music.Artist}
           image={music.Image}
@@ -48,7 +52,9 @@ export const Items = ({
       ))}
       {videogames.map((videogame) => (
         <Item
+          type="videogame"
           key={videogame.ID}
+          id={videogame.ID}
           title={videogame.Title}
           subtitle={videogame.Studio}
           image={videogame.Image}
@@ -57,7 +63,9 @@ export const Items = ({
       ))}
       {boardGames.map((boardGame) => (
         <Item
+          type="boardgame"
           key={boardGame.ID}
+          id={boardGame.ID}
           title={boardGame.Title}
           subtitle={
             boardGame?.Designers?.length > 0
@@ -70,7 +78,9 @@ export const Items = ({
       ))}
       {movies.map((movie) => (
         <Item
+          type="movie"
           key={movie.ID}
+          id={movie.ID}
           title={movie.Title}
           subtitle={movie.Director}
           image={movie.Image}
