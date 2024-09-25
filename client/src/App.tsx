@@ -4,7 +4,7 @@ import { Router } from "./router/Router";
 function App() {
   return (
     <>
-      <Toaster richColors closeButton position="bottom-right" />
+      <Toaster richColors position="bottom-right" duration={2500} closeButton />
       <Router />
     </>
   );
