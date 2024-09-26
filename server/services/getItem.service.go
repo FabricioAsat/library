@@ -60,9 +60,33 @@ func GetMusicService(c *fiber.Ctx, ctx context.Context, db *mongo.Client, objID 
 }
 
 func GetMovieService(c *fiber.Ctx, ctx context.Context, db *mongo.Client, objID primitive.ObjectID) error {
-	return nil
+	moviesCollection := mongocollect.GetCollection(db, "movies")
+	var movie models.MovieModel
+
+	if err := moviesCollection.FindOne(ctx, bson.M{"_id": objID}).Decode(&movie); err != nil {
+		return c.Status(fiber.StatusNotFound).JSON(fiber.Map{
+			"error": err.Error(),
+		})
+	}
+
+	return c.Status(fiber.StatusOK).JSON(fiber.Map{
+		"message": "Movie found",
+		"data":    movie,
+	})
 }
 
 func GetBoardGameService(c *fiber.Ctx, ctx context.Context, db *mongo.Client, objID primitive.ObjectID) error {
-	return nil
+	boardgamesCollection := mongocollect.GetCollection(db, "boardgames")
+	var boardgame models.BoardGameModel
+
+	if err := boardgamesCollection.FindOne(ctx, bson.M{"_id": objID}).Decode(&boardgame); err != nil {
+		return c.Status(fiber.StatusNotFound).JSON(fiber.Map{
+			"error": err.Error(),
+		})
+	}
+
+	return c.Status(fiber.StatusOK).JSON(fiber.Map{
+		"message": "Boardgame found",
+		"data":    boardgame,
+	})
 }
