@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { getItem } from "../../api/itemsReq";
-import { IBook } from "../../types/items";
+import { IVideogame } from "../../types/items";
 import { toast } from "sonner";
 
-import bookImg from "../../assets/logo.svg";
+import musicImg from "../../assets/music.svg";
 import itemImg from "../../assets/item.svg";
 
 interface IInfoShown {
@@ -11,29 +11,28 @@ interface IInfoShown {
   info: string;
 }
 
-export const Book = ({
+export const Videogame = ({
   id,
   setIsLoading,
 }: {
   id: string;
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
-  const [item, setItem] = useState<IBook | null>(null);
+  const [item, setItem] = useState<IVideogame | null>(null);
   const [infoShown, setInfoShown] = useState<IInfoShown>();
 
   useEffect(() => {
     setIsLoading(true);
     const fetchItem = async () => {
-      const res = await getItem(id, "book");
+      const res = await getItem(id, "videogame");
       if (!res.status || !res.data) {
         toast.error(res.message);
         setIsLoading(false);
         return;
       }
-      setItem((res.data as IBook) || null);
+      setItem((res.data as IVideogame) || null);
       setIsLoading(false);
     };
-
     fetchItem();
     setInfoShown({ current: "description", info: item?.Description || "" });
   }, [id]);
@@ -49,9 +48,9 @@ export const Book = ({
       ) : (
         <div className="flex flex-col items-center w-full h-full pt-6 pl-3 mb-16 md:pl-10 md:items-start md:flex-row gap-x-10">
           <img
-            src={item.Image || bookImg}
+            src={item.Image || musicImg}
             alt={item.Title}
-            className="object-cover w-48 my-10 rounded-2xl h-60"
+            className="object-contain w-48 my-10 rounded-2xl h-60"
           />
 
           <div className="flex flex-col w-full md:pt-10 gap-y-5">
@@ -59,7 +58,11 @@ export const Book = ({
               <img src={itemImg} alt="Item img" className="h-10" />
               <div className="flex flex-col">
                 <h2 className="text-2xl font-bold">{item.Title}</h2>
-                <h3 className="text-lg italic">{item.Author || "Unknown"}</h3>
+                <h3 className="text-lg italic">
+                  {item.Platform ||
+                    "Unknown platform" + " - " + item.Studio ||
+                    "Unknown studio"}
+                </h3>
               </div>
             </div>
 
@@ -67,26 +70,19 @@ export const Book = ({
               <section className="flex flex-col gap-y-3">
                 <span className="flex items-center gap-x-5">
                   <p className="font-bold">
-                    {new Date(item.PublishedAt || "").getFullYear() ||
-                      "Unknown year"}
+                    EAN:{" "}
+                    <i className="font-normal">{item.EAN || "Unknown EAN"}</i>
                   </p>
-                  <p className="italic">
-                    {item.Pages + " pages" || "Unknown pages"}
+                  <p className="font-bold">
+                    UPC:{" "}
+                    <i className="font-normal">{item.UPC || "Unknown UPC"}</i>
                   </p>
                 </span>
 
                 <span className="flex items-center gap-x-5">
                   <p className="font-bold">
-                    ISBN 13:{" "}
-                    <i className="font-normal">
-                      {item.ISBN13 || "Unknown ISBN"}
-                    </i>
-                  </p>
-                  <p className="font-bold">
-                    ISBN 10:{" "}
-                    <i className="font-normal">
-                      {item.ISBN10 || "Unknown ISBN"}
-                    </i>
+                    ESRB:{" "}
+                    <i className="font-normal">{item.ESRB || "Unknown ESRB"}</i>
                   </p>
                 </span>
 
