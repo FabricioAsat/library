@@ -51,7 +51,7 @@ export const Music = ({
           <img
             src={item.Image || musicImg}
             alt={item.Title}
-            className="object-contain w-48 my-10 rounded-2xl h-60"
+            className="object-cover w-48 my-10 rounded-2xl h-60"
           />
 
           <div className="flex flex-col w-full md:pt-10 gap-y-5">

@@ -13,6 +13,7 @@ export function itemToBook(item: IBook, collectionId: string): object {
     return {};
   }
 
+  console.log(item);
   const bodyData = {
     title: item.Title,
     author: item.Author,
@@ -28,7 +29,7 @@ export function itemToBook(item: IBook, collectionId: string): object {
       Number(item.Month || 0),
       Number(item.Days || 0)
     ).toISOString(),
-    tags: item?.Tags?.split(", ").map((nombre) => nombre.trim()) || [],
+    tags: item?.Tags?.split(",").map((nombre) => nombre.trim()) || [],
     group: item.Group,
     notes: item.Notes,
   };

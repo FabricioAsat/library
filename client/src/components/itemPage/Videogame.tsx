@@ -3,7 +3,7 @@ import { getItem } from "../../api/itemsReq";
 import { IVideogame } from "../../types/items";
 import { toast } from "sonner";
 
-import musicImg from "../../assets/music.svg";
+import videogameImg from "../../assets/videogame.svg";
 import itemImg from "../../assets/item.svg";
 
 interface IInfoShown {
@@ -48,9 +48,9 @@ export const Videogame = ({
       ) : (
         <div className="flex flex-col items-center w-full h-full pt-6 pl-3 mb-16 md:pl-10 md:items-start md:flex-row gap-x-10">
           <img
-            src={item.Image || musicImg}
+            src={item.Image || videogameImg}
             alt={item.Title}
-            className="object-contain w-48 my-10 rounded-2xl h-60"
+            className="object-cover w-48 my-10 rounded-2xl h-60"
           />
 
           <div className="flex flex-col w-full md:pt-10 gap-y-5">
