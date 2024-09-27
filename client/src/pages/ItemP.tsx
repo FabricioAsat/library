@@ -18,7 +18,7 @@ export const ItemP = () => {
   return (
     <Container>
       <div className="relative flex flex-col items-center w-full h-full md:items-start">
-        <Header isLoading={isLoading} />
+        <Header isLoading={isLoading} type={type} id={id as string} />
 
         {type === "book" ? (
           <Book id={id as string} setIsLoading={setIsLoading} />
