@@ -21,7 +21,7 @@ export function itemToMovie(item: IMovie, collectionId: string): object {
     ean: item.EAN,
     director: item.Director,
     studio: item.Studio,
-    actors: item?.Actors?.split(", ").map((nombre) => nombre.trim()) || [],
+    actors: item?.Actors?.split(",").map((nombre) => nombre.trim()) || [],
     image: item.Image,
     duration: Number(item.Duration),
     price: Number(item.Price),
@@ -31,7 +31,7 @@ export function itemToMovie(item: IMovie, collectionId: string): object {
       Number(item.Month || 0),
       Number(item.Days || 0)
     ).toISOString(),
-    tags: item?.Tags?.split(", ").map((nombre) => nombre.trim()) || [],
+    tags: item?.Tags?.split(",").map((nombre) => nombre.trim()) || [],
     group: item.Group,
     notes: item.Notes,
   };

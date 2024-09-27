@@ -22,9 +22,8 @@ export function itemToBoardgame(
     collectionId: collectionId,
     upc: item.UPC,
     ean: item.EAN,
-    designers:
-      item?.Designers?.split(", ").map((nombre) => nombre.trim()) || [],
-    artists: item?.Artists?.split(", ").map((nombre) => nombre.trim()) || [],
+    designers: item?.Designers?.split(",").map((nombre) => nombre.trim()) || [],
+    artists: item?.Artists?.split(",").map((nombre) => nombre.trim()) || [],
     playTime: Number(item.PlayTime),
     age: Number(item.Age),
     numberPlayers: Number(item.NumberPlayers),
@@ -36,7 +35,7 @@ export function itemToBoardgame(
       Number(item.Month || 0),
       Number(item.Days || 0)
     ).toISOString(),
-    tags: item?.Tags?.split(", ").map((nombre) => nombre.trim()) || [],
+    tags: item?.Tags?.split(",").map((nombre) => nombre.trim()) || [],
     group: item.Group,
     notes: item.Notes,
   };
