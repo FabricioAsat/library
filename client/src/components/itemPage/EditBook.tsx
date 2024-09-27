@@ -42,16 +42,14 @@ export const EditBook = ({
     setBook({ ...book, [e.target.name]: e.target.value });
   };
 
-  console.log(book);
-
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
     const body = itemToBook(book, book.CollectionID);
-    console.log("Body: ", body);
     if (!body) return;
 
     async function request() {
-      const req = await putItem({ type: "book", data: body }, book.ID);
+      const req = await putItem(body, book.ID);
 
       if (!req.status) {
         toast.error(req.message);

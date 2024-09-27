@@ -13,6 +13,7 @@ export function itemToBook(item: IBook, collectionId: string): object {
     return {};
   }
 
+  console.log(item);
   const bodyData = {
     title: item.Title,
     author: item.Author,

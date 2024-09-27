@@ -2,6 +2,7 @@ package items
 
 import (
 	"context"
+	"fmt"
 	"sell-point/database"
 	"sell-point/models"
 	"sell-point/services"
@@ -24,13 +25,15 @@ func PutItem(c *fiber.Ctx) error {
 			"error": err.Error(),
 		})
 	}
-	
+
 	var itemRequest models.ItemReq
 	if err := c.BodyParser(&itemRequest); err != nil {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
 			"error": err.Error(),
 		})
 	}
+
+	fmt.Println(itemRequest.Data)
 
 	switch itemRequest.Type {
 	case models.BookType:

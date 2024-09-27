@@ -16,14 +16,13 @@ import (
 func PutBookService(c *fiber.Ctx, ctx context.Context, db *mongo.Client, objID primitive.ObjectID, data json.RawMessage) error {
 	booksCollection := mongocollect.GetCollection(db, "books")
 	var book models.BookModel
-	fmt.Println(data)
-	
+
 	if err := json.Unmarshal(data, &book); err != nil {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
 			"error": err.Error(),
 		})
 	}
-
+	fmt.Println(objID)
 
 	if err := booksCollection.FindOneAndUpdate(ctx, bson.M{"_id": objID}, bson.M{"$set": book}); err.Err() != nil {
 		return c.Status(fiber.StatusNotFound).JSON(fiber.Map{
