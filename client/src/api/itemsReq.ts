@@ -139,3 +139,32 @@ export async function deleteItem(
     return { message: "Error desconocido", data: null, status: false };
   }
 }
+
+export async function putItem(
+  item: object,
+  itemId: string
+): Promise<IResponseAllItems> {
+  try {
+    const { data } = await axios.put<IResponseAllItems>(
+      `${import.meta.env.VITE_API_URL}/items/${itemId}`,
+      item
+    );
+    return { data: data.data, message: data.message, status: true };
+  } catch (err) {
+    const axiosError = err as AxiosError;
+    if (
+      axiosError.response &&
+      "data" in axiosError.response &&
+      typeof axiosError.response.data === "object" &&
+      axiosError.response.data !== null &&
+      "error" in axiosError.response.data
+    ) {
+      return {
+        message: String(axiosError.response.data.error),
+        data: null,
+        status: false,
+      };
+    }
+    return { message: "Error desconocido", data: null, status: false };
+  }
+}

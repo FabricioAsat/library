@@ -3,14 +3,18 @@ import hamb from "../assets/hamb.svg";
 import close from "../assets/close.svg";
 
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 export const Header = () => {
+  const navigateTo = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <div className="flex items-center justify-between w-full px-5 transition-all duration-300 ease-in-out lg:h-screen lg:flex-col lg:max-w-80 lg:px-0 lg:bg-neutral-100">
-      <picture className="flex items-center h-16 gap-3 lg:pt-10">
+      <picture
+        onClick={() => navigateTo("/")}
+        className="flex items-center h-16 gap-3 cursor-pointer lg:pt-10"
+      >
         <i className="text-3xl font-bold">Library</i>
         <img src={logo} alt="logo" className="h-10 lg:h-8" />
       </picture>

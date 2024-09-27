@@ -24,7 +24,7 @@ func PutItem(c *fiber.Ctx) error {
 			"error": err.Error(),
 		})
 	}
-
+	
 	var itemRequest models.ItemReq
 	if err := c.BodyParser(&itemRequest); err != nil {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
