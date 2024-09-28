@@ -55,7 +55,7 @@ func PutMovieService(c *fiber.Ctx, ctx context.Context, db *mongo.Client, objID 
 }
 
 func PutMusicService(c *fiber.Ctx, ctx context.Context, db *mongo.Client, objID primitive.ObjectID, data json.RawMessage) error {
-	musicCollection := mongocollect.GetCollection(db, "music")
+	musicCollection := mongocollect.GetCollection(db, "musics")
 	var music models.MusicModel
 	if err := json.Unmarshal(data, &music); err != nil {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{

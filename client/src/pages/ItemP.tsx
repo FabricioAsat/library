@@ -34,13 +34,33 @@ export const ItemP = () => {
             setShowEdit={setShowEdit}
           />
         ) : type === "music" ? (
-          <Music id={id as string} setIsLoading={setIsLoading} />
+          <Music
+            id={id as string}
+            setIsLoading={setIsLoading}
+            showEdit={showEdit}
+            setShowEdit={setShowEdit}
+          />
         ) : type === "videogame" ? (
-          <Videogame id={id as string} setIsLoading={setIsLoading} />
+          <Videogame
+            id={id as string}
+            setIsLoading={setIsLoading}
+            showEdit={showEdit}
+            setShowEdit={setShowEdit}
+          />
         ) : type === "movie" ? (
-          <Movie id={id as string} setIsLoading={setIsLoading} />
+          <Movie
+            id={id as string}
+            setIsLoading={setIsLoading}
+            showEdit={showEdit}
+            setShowEdit={setShowEdit}
+          />
         ) : type === "boardgame" ? (
-          <Boardgame id={id as string} setIsLoading={setIsLoading} />
+          <Boardgame
+            id={id as string}
+            setIsLoading={setIsLoading}
+            showEdit={showEdit}
+            setShowEdit={setShowEdit}
+          />
         ) : null}
       </div>
     </Container>
