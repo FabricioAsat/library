@@ -26,7 +26,7 @@ export const Item = ({
       <img
         src={image || alternativeImage}
         alt="Book image"
-        className={`object-contain h-full ${
+        className={`object-contain max-h-36 h-full ${
           image ? "w-full rounded-2xl object-cover mb-2" : "w-2/3 m-auto"
         }`}
       />
