@@ -153,8 +153,8 @@ export const CreateVideogame = ({
 
       <input
         type="submit"
-        value="Create book"
-        className="px-5 py-2 mt-10 font-bold text-white rounded-md cursor-pointer bg-sky-500 max-w-40"
+        value="Create videogame"
+        className="px-5 py-2 mt-10 font-bold text-white rounded-md cursor-pointer bg-sky-500 max-w-60"
       />
     </div>
   );

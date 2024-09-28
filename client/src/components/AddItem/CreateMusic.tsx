@@ -155,7 +155,7 @@ export const CreateMusic = ({
 
       <input
         type="submit"
-        value="Create book"
+        value="Create music"
         className="px-5 py-2 mt-10 font-bold text-white rounded-md cursor-pointer bg-sky-500 max-w-40"
       />
     </div>

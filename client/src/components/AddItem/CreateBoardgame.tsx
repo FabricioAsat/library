@@ -33,16 +33,16 @@ export const CreateBoardgame = ({
           name="Designers"
           value={item.Designers}
           onChange={handleChange}
-          tinyInfo="Separate actors with commas."
+          tinyInfo="Separate designers with commas."
         />
 
         <LabelAndImput
-          label="Actors"
-          id="Actors"
-          name="Actors"
+          label="Artists"
+          id="Artists"
+          name="Artists"
           value={item.Artists}
           onChange={handleChange}
-          tinyInfo="Separate actors with commas."
+          tinyInfo="Separate artists with commas."
         />
       </div>
 
@@ -187,8 +187,8 @@ export const CreateBoardgame = ({
 
       <input
         type="submit"
-        value="Create book"
-        className="px-5 py-2 mt-10 font-bold text-white rounded-md cursor-pointer bg-sky-500 max-w-40"
+        value="Create boardgame"
+        className="px-5 py-2 mt-10 font-bold text-white rounded-md cursor-pointer bg-sky-500 max-w-60"
       />
     </div>
   );
