@@ -31,7 +31,7 @@ export const Items = ({
       {books.length > 0 && (
         <section className="flex flex-col gap-y-3">
           <h2 className="text-3xl font-bold">Books</h2>
-          <div className="flex flex-wrap justify-center gap-5 lg:justify-start">
+          <div className="flex flex-wrap justify-start gap-5 px-4">
             {books.map((book) => (
               <Item
                 type="book"
@@ -50,7 +50,7 @@ export const Items = ({
       {music.length > 0 && (
         <section className="flex flex-col gap-y-3">
           <h2 className="text-3xl font-bold">Musics</h2>
-          <div className="flex flex-wrap justify-center gap-5 lg:justify-start">
+          <div className="flex flex-wrap justify-start gap-5 px-4">
             {music.map((music) => (
               <Item
                 type="music"
@@ -69,7 +69,7 @@ export const Items = ({
       {videogames.length > 0 && (
         <section className="flex flex-col gap-y-3">
           <h2 className="text-3xl font-bold">Videogames</h2>
-          <div className="flex flex-wrap justify-center gap-5 lg:justify-start">
+          <div className="flex flex-wrap justify-start gap-5 px-4">
             {videogames.map((videogame) => (
               <Item
                 type="videogame"
@@ -88,7 +88,7 @@ export const Items = ({
       {boardGames.length > 0 && (
         <section className="flex flex-col gap-y-3">
           <h2 className="text-3xl font-bold">Boardgames</h2>
-          <div className="flex flex-wrap justify-center gap-5 lg:justify-start">
+          <div className="flex flex-wrap justify-start gap-5 px-4">
             {boardGames.map((boardGame) => (
               <Item
                 type="boardgame"
@@ -111,7 +111,7 @@ export const Items = ({
       {movies.length > 0 && (
         <section className="flex flex-col gap-y-3">
           <h2 className="text-3xl font-bold">Movies</h2>
-          <div className="flex flex-wrap justify-center gap-5 lg:justify-start">
+          <div className="flex flex-wrap justify-start gap-5 px-4">
             {movies.map((movie) => (
               <Item
                 type="movie"
